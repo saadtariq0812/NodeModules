@@ -11,4 +11,4 @@ server.listen(5000);
 const ding = require('lodash');
 const s = [1,[2,[3,[4]]]];
 const f = ding.flattenDeep(s);
-console.log(f);
+console.log(f, "changes");
