@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start" : "node app.js",
-    "dev" : "nodemon"
+    "dev" : "nodemon app.js"
   },
-  "author": "",
+  "author": "saad",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.21"
