@@ -24,7 +24,7 @@ console.log(f, "changes made");
 // SIMPLE EVENT LOOP EXPLAINATION
 
 
-const {readFile} = require('fs');
+//const {readFile} = require('fs');
 /*
 
 console.log("started first task");
@@ -42,6 +42,7 @@ readFile("./content/textFile1", "utf8", (err, result) => {
 console.log("starting second task");
 */
 
+/*
 const test = (path) => {
     return new Promise((resolve, reject) => {
         readFile(path, "utf8", (err, result) => {
@@ -56,4 +57,21 @@ const test = (path) => {
 
 test("./content/textFile1").then((result) => console.log(result)).catch((err) => console.log(err));
 console.log("run second");
+*/
+const server = require('http');
+const myServer = server.createServer();
+
+//const eventEmitter = require('events');
+//const myEmitter = new eventEmitter();
+
+//WE CAN DO THIS DIRECTLY FROM HTTP MODULE THINGIE BCS HTTP MODULE EXTENDS EVENT MODULE
+//"request" BELOW IS A KEYWORD
+myServer.on("request", (req, res) => {
+    res.end("hello");
+});
+
+myServer.listen(5000);
+
+myServer.emit("req");
+
 
