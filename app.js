@@ -58,20 +58,47 @@ const test = (path) => {
 test("./content/textFile1").then((result) => console.log(result)).catch((err) => console.log(err));
 console.log("run second");
 */
-const server = require('http');
-const myServer = server.createServer();
+const http = require('http');
+//const server = http.createServer();
 
 //const eventEmitter = require('events');
 //const myEmitter = new eventEmitter();
 
 //WE CAN DO THIS DIRECTLY FROM HTTP MODULE THINGIE BCS HTTP MODULE EXTENDS EVENT MODULE
 //"request" BELOW IS A KEYWORD
-myServer.on("request", (req, res) => {
+/*
+server.on("request", (req, res) => {
     res.end("hello");
 });
 
-myServer.listen(5000);
+server.listen(5000);
 
-myServer.emit("req");
+server.emit("req");
 
+*/
+
+// MAKE WEBPAGES AND USING RES WITH STATUS CODES. 
+// UNCOMMENT LINE 61 i.e const http = require('http'); FOR THIS TO RUN
+const server2 = http.createServer((req, res) => {
+    const url = req.url;
+    if(url === "/" || url === "/home"){
+        res.writeHead(200, {"content-type": "text/html"});
+        res.write("<h1>Home page</h1>");
+        res.end();
+    }
+    else if (url === "/miru") {
+        res.writeHead(200, {"content-type": "text/html"});
+        res.write("<h1>Mir hamza page</h1>");
+        res.write("<h2>Please come dota brother.</h2>")
+        res.end();
+    }
+    else {
+        res.writeHead(404, {"content-type" : "text/html"});
+        res.write("<h1>Oopsie daisy, page not found</h1>");
+        res.end()
+    }
+    }
+)
+
+server2.listen(7000);
 
