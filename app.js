@@ -58,7 +58,7 @@ const test = (path) => {
 test("./content/textFile1").then((result) => console.log(result)).catch((err) => console.log(err));
 console.log("run second");
 */
-const http = require('http');
+//const http = require('http');
 //const server = http.createServer();
 
 //const eventEmitter = require('events');
@@ -79,6 +79,8 @@ server.emit("req");
 
 // MAKE WEBPAGES AND USING RES WITH STATUS CODES. 
 // UNCOMMENT LINE 61 i.e const http = require('http'); FOR THIS TO RUN
+
+/*
 const server2 = http.createServer((req, res) => {
     const url = req.url;
     if(url === "/" || url === "/home"){
@@ -101,4 +103,63 @@ const server2 = http.createServer((req, res) => {
 )
 
 server2.listen(7000);
+
+*/
+
+//EXPRESS FUNCTIONALITY STARTS
+
+const express = require("express");
+const path = require("path");
+const app = express();
+
+
+//app.get
+//app.post
+//app.put
+//app.delete
+//app.all
+//app.use (used for middleware)
+//app.listen
+
+
+/*
+app.get("/", (req,res) => {
+    res.status(200).send("home page");
+})
+
+app.get("/about", (req,res) => {
+    res.status(200).send("about page");
+})
+
+app.get("/download", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./content/simpleHttp"));
+})
+
+app.all("*", (req,res) => {
+    res.status(404).send("<h1>Resource not found oopsie</h1>");
+})
+
+*/
+
+//setup static and middleware
+//app.use(express.static("./public"));
+
+const {products} = require("./data")
+
+
+app.get("/", (req, res) => {
+    res.json(products);
+})
+
+
+app.all("*", (req,res) => {
+    res.status(404).send("<h1>Resource not found oopsie</h1>");
+})
+
+
+app.listen(5000, () => {
+    console.log("server is listening on port 5000...")
+})
+
+
 
