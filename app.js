@@ -170,6 +170,7 @@ app.get("/api/data/:productID", (req, res) => {
 app.get("/api/v1/query", (req, res) => {
     console.log(req.query);
     res.send("za worldo");
+    
 })
 
     
