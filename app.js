@@ -148,8 +148,32 @@ const {products} = require("./data")
 
 
 app.get("/", (req, res) => {
-    res.json(products);
+    res.send("<h1>Home Page</h1><a href = /api/data>Products</a>");
 })
+
+//COLON IN THE 3RD PART OF URL IS THE ROUTE PARAM
+
+app.get("/api/data/:productID", (req, res) => {
+        const {productID} = req.params; 
+        const singleProduct = products.find((product) => product.id === Number(productID));
+
+        if(!singleProduct) {
+            return res.status(404).send("Product Does Not Exist!");
+        }
+        res.json(singleProduct);
+    })
+
+    //FRO WHAT I CAN TELL THIS IS JUST ROUTE PARAMS
+    //BUT WE CAN GIVE UNLIMITED QUERY PARAMS IN THE REQ URL
+    //url format: /api/v1/query?id=2&name=saad
+
+app.get("/api/v1/query", (req, res) => {
+    console.log(req.query);
+    res.send("za worldo");
+})
+
+    
+
 
 
 app.all("*", (req,res) => {
