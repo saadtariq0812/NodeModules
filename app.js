@@ -142,8 +142,10 @@ app.all("*", (req,res) => {
 */
 
 //setup static and middleware
+// this is a built in express middleware fnc .static
 //app.use(express.static("./public"));
 
+/*
 const {products} = require("./data")
 
 
@@ -163,9 +165,10 @@ app.get("/api/data/:productID", (req, res) => {
         res.json(singleProduct);
     })
 
-    //FRO WHAT I CAN TELL THIS IS JUST ROUTE PARAMS
-    //BUT WE CAN GIVE UNLIMITED QUERY PARAMS IN THE REQ URL
+    //FRO WHAT I CAN TELL THIS IS JUST QUERYING AND CUTTING DOWN SEARCH SPACE
+    //WE CAN GIVE UNLIMITED QUERY PARAMS IN THE REQ URL
     //url format: /api/v1/query?id=2&name=saad
+    //note: query is NOT a keyword here
 
 app.get("/api/v1/query", (req, res) => {
     console.log(req.query);
@@ -186,5 +189,45 @@ app.listen(5000, () => {
     console.log("server is listening on port 5000...")
 })
 
+*/
+
+// req => middleware => res
+// unless youre terminating whole cycle middleware
+//needs to pass it on to next middleware
 
 
+/*
+const loggerMiddlewareFunc = (req, res, next) => {
+    const method = req.method;
+    const url = req.url;
+    const time = new Date().getFullYear();
+    console.log(method, url, time);
+    next();
+}
+
+//app.use("/api", loggerMiddlewareFunc) 
+//this will apply middleware to any path that has /api before it
+app.use(loggerMiddlewareFunc); //will call this func 
+//for any route. here it works for about as well
+//even though there is no middleware.
+
+app.get("/", loggerMiddlewareFunc, (req, res) => {
+    res.send("Home Page");
+})
+
+app.get("/about", (req, res) => {
+    res.send("About Page");
+})
+
+//ADDITIONAL SYNTAX FOR app.use()
+
+//app.use([fucn1, func2]); run 2 middleware funcs
+
+*/
+
+
+
+
+app.listen(5000, () => {
+    console.log("server is listening on port 5000...")
+})
