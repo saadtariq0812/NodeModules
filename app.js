@@ -11,6 +11,42 @@ const server = httpee.createServer((req, res) => {
 server.listen(5000);
 */
 
+// WHEN YOU ARE EMITTING AN EVENT IN A DIFF MODULE AND LISTENING FOR IT IN ANOTHER
+//ALWAYS PUT THE EMITTER FUNC INSIDE A CLASS AND THEN EXPORT THAT CLASS.
+//THIS IS BCS THE BUILT-IN MODULE 'REQUIRE' CONSIDERS BOTH EVENT EMITTER OBJECTS IN THE DIFF MODULES TO BE DIFF 
+//EVEN WITH SAME NAME.
+
+/*
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+this emiiter object is not needed anymore when using class^
+
+
+class Logger extends EventEmitter {
+    log(message) {
+        console.log(message);
+
+        this.emit("messageLogged", {id : 1, url : 'http://'});
+
+    }
+}
+
+module.exports = Logger;
+
+app.js code below now
+
+
+
+const Logger = require('./logger')
+const logger = new Logger()   bcs we exported a class
+
+logger.on('messageLogged' (args) => {
+    console.log('Listener Called', args);
+})
+logger.log('message');
+*/
+
+
 
 // USING A BUILT IN NODE MODULE
 
